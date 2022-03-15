@@ -1,0 +1,69 @@
+<table class="table-auto w-full mt-2">
+  <thead class="text-xs font-semibold uppercase text-gray-700 bg-gray-100">
+    <tr>
+      <th class="p-2 whitespace-nowrap">
+        <div class="font-semibold text-left">Producto</div>
+      </th>
+      <th class="p-2 whitespace-nowrap">
+        <div class="font-semibold text-left">Cantidad</div>
+      </th>
+      <th class="p-2 whitespace-nowrap">
+        <div class="font-semibold text-left">Precio unitario</div>
+      </th>
+      <th class="p-2 whitespace-nowrap">
+        <div class="font-semibold text-left">Precio total</div>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody class="text-sm divide-y divide-gray-100">
+    <tr *ngFor="let product of products">
+      <!-- Product name -->
+      <td class="whitespace-nowrap py-3 pl-4">
+        <div class="text-left">
+          {{ product?.Producto | titlecase }}
+        </div>
+      </td>
+      <!-- Quantity -->
+      <td class="whitespace-nowrap py-3 pl-4">
+        <div class="text-left">
+          {{ product?.Cantidad }}
+        </div>
+      </td>
+      <!-- Unit price -->
+      <td class="whitespace-nowrap py-3 pl-4">
+        <div class="text-left">${{ product?.PrecioUnitario | number }}</div>
+      </td>
+      <!-- Total price -->
+      <td class="whitespace-nowrap text-green-500 py-3 pl-4">
+        <div class="text-left">
+          ${{ getTotalPriceByProduct(product) | number }}
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <!-- Total witout iva -->
+      <td class="whitespace-nowrap py-3 pl-4" colspan="3">
+        <div class="font-semibold text-right">Total sin IVA</div>
+      </td>
+      <td class="whitespace-nowrap py-3 pl-4">
+        <div class="text-left font-bold">
+          ${{ getTotalPriceInvoice() | number }}
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <!-- Total with iva -->
+      <td class="whitespace-nowrap py-3 pl-4" colspan="3">
+        <div class="font-semibold text-right">Total con IVA</div>
+      </td>
+      <td class="whitespace-nowrap py-3 pl-4">
+        <div class="text-left font-bold text-green-500">
+          ${{ getTotalPriceInvoice(true) | number }}
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

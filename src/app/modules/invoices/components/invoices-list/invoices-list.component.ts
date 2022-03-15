@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { IInvoice, IInvoiceProduct } from '@models/IInvoice.interface';
 import { InvoicesService } from '@modules/invoices/services/invoices.service';
+import { InvoicesDetailsComponent } from '../invoices-details/invoices-details.component';
 
 @Component({
   selector: 'app-invoices-list',
@@ -14,7 +16,9 @@ export class InvoicesListComponent implements OnInit {
   tableColumns: string[] = [];
   invoices: IInvoice[] = [];
 
-  constructor(private _invoicesService: InvoicesService) {
+  constructor(
+    private _invoicesService: InvoicesService,
+    private _dialog: MatDialog) {
     this.tableColumns = ['Número de Factura', 'Cliente', 'Fecha de factura', 'Total sin IVA', 'Total con IVA', 'Opciones'];
   }
 
@@ -30,12 +34,19 @@ export class InvoicesListComponent implements OnInit {
       });
   }
 
-  getTotalPriceInvoice(invoice: IInvoice, withIva = false): any {
+  getTotalPriceInvoice(invoice: IInvoice, withIva = false): number {
     const totalPrice = invoice.Detalle
-      .map((product: IInvoiceProduct) => product.PrecioUnitario)
+      .map((product: IInvoiceProduct) => product.PrecioUnitario * product.Cantidad)
       .reduce((prev, curr) => prev + curr);
 
     return withIva ? Math.floor(Number(totalPrice + invoice?.IVA)) : Math.floor(Number(totalPrice));
   }
 
+  showInvoiceDetails(invoice: IInvoice): void {
+    this._dialog.open(InvoicesDetailsComponent, {
+      autoFocus: false,
+      data: invoice,
+      width: '800px'
+    })
+  }
 }

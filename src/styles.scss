@@ -1,7 +1,8 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-@import "./assets/scss/tailwind.scss";
+@import "./assets/scss/tailwind";
+@import "./assets/scss/material";
 
 html {
   height: 100%;

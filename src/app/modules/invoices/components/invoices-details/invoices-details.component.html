@@ -1,0 +1,41 @@
+<section>
+  <header>
+    <div class="text-2xl font-bold">
+      Factura #{{ invoiceData.NumeroFactura }}
+    </div>
+    <span>Fecha: {{ invoiceData.Fecha | date: "dd/MM/yyyy" }}</span>
+  </header>
+
+  <div class="flex flex-col gap-4 my-6">
+    <div>
+      <span class="text-sm font-bold text-purple-800">Cliente</span>
+      <div class="flex flex-col">
+        <span>Nombre: {{ invoiceData.NombreCliente }}</span>
+        <span>ID: {{ invoiceData.DocumentoCliente }}</span>
+      </div>
+    </div>
+
+    <div>
+      <span class="text-sm font-bold text-purple-800">Factura</span>
+      <div class="flex flex-col">
+        <span>Número de factura: {{ invoiceData.NumeroFactura }}</span>
+        <span>Tipo de pago: {{ invoiceData.TipodePago }}</span>
+        <span
+          >Descuento:
+          {{
+            invoiceData.Descuento ? (invoiceData.Descuento | number) + "%" : ""
+          }}
+        </span>
+        <span>IVA: {{ invoiceData.IVA | number }}</span>
+      </div>
+    </div>
+
+    <app-invoices-product
+      [invoice]="invoiceData"
+    ></app-invoices-product>
+  </div>
+
+  <div mat-dialog-actions align="end" class="mx-6">
+    <button mat-button [mat-dialog-close]="true" class="text-xs">Cerrar</button>
+  </div>
+</section>
