@@ -1,0 +1,9 @@
+<section>
+  <input
+    type="text"
+    placeholder="&#xF002; Search Invoice..."
+    class="tw-input"
+    [formControl]="filter"
+    (keyup)="emitInvoiceFilter()"
+  />
+</section>

@@ -1,0 +1,11 @@
+.tw-btn-primary {
+  @apply bg-purple-800 text-white rounded-md text-sm py-2 px-4;
+}
+
+.tw-btn-gray {
+  @apply bg-gray-200 text-gray-800 text-xs rounded-md text-sm py-2 px-4;
+}
+
+.tw-input {
+  @apply bg-white appearance-none border-2 border-gray-200 rounded-md w-full text-gray-700 leading-tight transition text-sm py-2 px-4 focus:outline-none focus:bg-white focus:border-purple-800;
+}

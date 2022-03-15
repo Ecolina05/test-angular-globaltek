@@ -23,6 +23,7 @@
       "dom"
     ],
     "paths": {
+      "@models/*": ["src/app/core/models/*"],
       "@modules/*": ["src/app/modules/*"],
       "@shared/*": ["src/app/shared/*"]
     }

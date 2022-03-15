@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { InvoicesListComponent } from './invoices-list/invoices-list.component';
+import { InvoicesComponent } from './pages/invoices/invoices.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: InvoicesListComponent
+    component: InvoicesComponent
   }
 ];
 

@@ -1,0 +1,55 @@
+<table class="table-auto w-full">
+  <thead class="text-xs font-semibold uppercase text-gray-700 bg-gray-100">
+    <tr>
+      <th
+        *ngFor="let tableColumn of tableColumns; first as first; last as last"
+        [ngClass]="first ? 'rounded-tl-md' : last ? 'rounded-tr-md' : ''"
+        class="whitespace-nowrap py-3 pl-4"
+      >
+        <div class="font-semibold text-left">{{ tableColumn }}</div>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody
+    *ngIf="invoices.length > 0"
+    class="text-sm divide-y divide-gray-100 overflow-y-scroll"
+    style="height: 20vh"
+  >
+    <tr *ngFor="let invoice of invoices | search: invoiceFilter">
+      <td class="whitespace-nowrap py-3 pl-4">
+        <p class="text-left">
+          {{ invoice?.NumeroFactura }}
+        </p>
+      </td>
+      <td class="whitespace-nowrap py-2 pl-4">
+        <p class="text-left">
+          {{ invoice?.NombreCliente }}
+        </p>
+      </td>
+      <td class="whitespace-nowrap py-2 pl-4">
+        <p class="text-left font-medium">
+          {{ invoice?.Fecha }}
+        </p>
+      </td>
+      <td class="whitespace-nowrap py-2 pl-4">
+        <p class="text-left">${{ getTotalPriceInvoice(invoice) | number }}</p>
+      </td>
+      <td class="whitespace-nowrap py-2 pl-4">
+        <p class="text-left text-green-500 font-medium">
+          ${{ getTotalPriceInvoice(invoice, true) | number }}
+        </p>
+      </td>
+      <td>
+        <button class="tw-btn-gray">
+          <i class="fas fa-list-check mr-1"></i>
+          Detalles
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="invoices.length === 0">
+  <p class="text-center text-sm w-full pt-4">No invoices.</p>
+</div>
