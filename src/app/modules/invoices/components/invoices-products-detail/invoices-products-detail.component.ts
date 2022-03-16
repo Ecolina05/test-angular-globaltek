@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { IInvoice, IInvoiceProduct } from '@models/IInvoice.interface';
 
 @Component({
-  selector: 'app-invoices-product',
-  templateUrl: './invoices-product.component.html',
-  styleUrls: ['./invoices-product.component.scss']
+  selector: 'app-invoices-products-detail',
+  templateUrl: './invoices-products-detail.component.html',
+  styleUrls: ['./invoices-products-detail.component.scss']
 })
-export class InvoicesProductComponent implements OnInit {
+export class InvoicesProductsDetailComponent implements OnInit {
   @Input() invoice: IInvoice | any = {};
 
   products: IInvoiceProduct[] = [];

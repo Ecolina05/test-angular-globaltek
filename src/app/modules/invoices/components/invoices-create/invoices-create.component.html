@@ -1,0 +1,67 @@
+<section>
+  <header>
+    <div class="text-2xl font-bold">Crear factura</div>
+    <span
+      >Fecha: {{ invoiceForm.controls.Fecha.value | date: "dd/MM/yyyy" }}</span
+    >
+  </header>
+
+  <form [formGroup]="invoiceForm">
+    <div class="flex flex-col gap-4 my-6">
+      <div>
+        <span class="text-sm font-bold text-purple-800">Cliente</span>
+        <div class="flex flex-col gap-2 pt-2">
+          <input
+            formControlName="NombreCliente"
+            type="text"
+            class="tw-input"
+            placeholder="Nombre"
+          />
+          <input
+            formControlName="DocumentoCliente"
+            type="text"
+            class="tw-input"
+            placeholder="Identificación"
+          />
+        </div>
+      </div>
+
+      <div>
+        <span class="text-sm font-bold text-purple-800">Factura</span>
+        <div class="flex flex-col gap-2 pt-2">
+          <input
+            formControlName="NumeroFactura"
+            type="text"
+            class="tw-input mb-3"
+            placeholder="Número factura"
+          />
+          <span class="text-sm">Tipo de pago</span>
+          <mat-radio-group
+            formControlName="TipodePago"
+            color="primary"
+            class="flex gap-3 items-center"
+          >
+            <mat-radio-button value="Contado" class="text-sm"
+              >Contado
+            </mat-radio-button>
+            <mat-radio-button value="Crédito" class="text-sm"
+              >Crédito
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+
+      <app-invoices-products-create
+        formControlName="Detalle"
+      ></app-invoices-products-create>
+    </div>
+  </form>
+
+  <div mat-dialog-actions align="end" class="flex gap-4 mx-3">
+    <button mat-button [mat-dialog-close]="true" class="text-xs">Cerrar</button>
+    <button class="tw-btn-primary" (click)="createinvoice()">
+      <i class="fas fa-save mr-1"></i>
+      Guardar
+    </button>
+  </div>
+</section>

@@ -49,7 +49,7 @@
       </td>
       <td class="whitespace-nowrap py-3 pl-4">
         <div class="text-left font-bold">
-          ${{ getTotalPriceInvoice() | number }}
+          ${{ getTotalPriceInvoice() || 0 | number }}
         </div>
       </td>
     </tr>
@@ -61,7 +61,7 @@
       </td>
       <td class="whitespace-nowrap py-3 pl-4">
         <div class="text-left font-bold text-green-500">
-          ${{ getTotalPriceInvoice(true) | number }}
+          ${{ getTotalPriceInvoice(true) || 0 | number }}
         </div>
       </td>
     </tr>

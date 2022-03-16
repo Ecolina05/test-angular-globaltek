@@ -1,0 +1,80 @@
+<header class="text-right w-full">
+  <button class="tw-btn-gray text-xs" (click)="addProduct()">
+    <i class="fas fa-plus mr-2"></i>
+    Agregar nuevo producto
+  </button>
+</header>
+
+<table class="table-auto w-full mt-2">
+  <thead class="text-xs font-semibold uppercase text-gray-700 bg-gray-100">
+    <tr>
+      <th
+        *ngFor="let tableColumn of tableColumns"
+        class="p-2 whitespace-nowrap"
+      >
+        <div class="font-semibold text-left">{{ tableColumn }}</div>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <ng-container *ngFor="let product of products.controls; index as i">
+      <tr [formGroup]="product">
+        <td class="whitespace-nowrap py-2">
+          <input
+            formControlName="Item"
+            type="text"
+            class="tw-input"
+            placeholder="Item"
+          />
+        </td>
+        <td class="whitespace-nowrap py-2">
+          <input
+            formControlName="Producto"
+            type="text"
+            class="tw-input"
+            placeholder="Producto"
+          />
+        </td>
+        <td class="whitespace-nowrap py-2">
+          <input
+            formControlName="Cantidad"
+            type="text"
+            class="tw-input"
+            placeholder="Cantidad"
+          />
+        </td>
+        <td class="whitespace-nowrap py-2">
+          <input
+            formControlName="PrecioUnitario"
+            type="text"
+            class="tw-input"
+            placeholder="Precio Unitario"
+            [value]="product.controls.PrecioUnitario.value | number"
+          />
+        </td>
+        <td class="whitespace-nowrap py-2">
+          <input
+            formControlName="Descuento"
+            type="text"
+            class="tw-input"
+            placeholder="Descuento"
+          />
+        </td>
+        <td class="whitespace-nowrap py-2 pl-4">19%</td>
+        <td class="whitespace-nowrap py-2 pl-4">
+          ${{ getTotalPriceProduct(product.value) | number }}
+        </td>
+        <td class="whitespace-nowrap py-2">
+          <button
+            class="tw-btn-gray text-xs text-red-500"
+            (click)="deleteProduct(i)"
+          >
+            <i class="fas fa-trash mr-2"></i>
+            Eliminar
+          </button>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>

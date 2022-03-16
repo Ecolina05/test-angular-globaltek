@@ -23,23 +23,31 @@ export class InvoicesListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    window.addEventListener('updateInvoiceList', () => this.getInvoices());
     this.getInvoices();
   }
 
   getInvoices(): void {
+    const createdInvoices = JSON.parse(localStorage.getItem('createdInvoices') || '[]');
     this._invoicesService.getInvoices()
       .subscribe(invoices => {
         this.invoices = invoices;
+        this.invoices = this.invoices.concat(createdInvoices);
         this.totalInvoices.emit(this.invoices.length);
+        localStorage.setItem('totalInvoices', (this.invoices.length).toString());
       });
   }
 
   getTotalPriceInvoice(invoice: IInvoice, withIva = false): number {
-    const totalPrice = invoice.Detalle
-      .map((product: IInvoiceProduct) => product.PrecioUnitario * product.Cantidad)
-      .reduce((prev, curr) => prev + curr);
+    let totalPrice = 0;
 
-    return withIva ? Math.floor(Number(totalPrice + invoice?.IVA)) : Math.floor(Number(totalPrice));
+    if (invoice.Detalle?.length > 0) {
+      totalPrice = invoice.Detalle
+        .map((product: IInvoiceProduct) => product.PrecioUnitario * product.Cantidad)
+        .reduce((prev, curr) => prev + curr);
+
+    }
+    return withIva ? Math.floor(Number(totalPrice + invoice?.IVA)) || 0 : Math.floor(Number(totalPrice));
   }
 
   showInvoiceDetails(invoice: IInvoice): void {

@@ -12,7 +12,6 @@ export class InvoicesDetailsComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public invoiceData: IInvoice) { }
 
   ngOnInit(): void {
-    console.log(this.invoiceData);
   }
 
 }

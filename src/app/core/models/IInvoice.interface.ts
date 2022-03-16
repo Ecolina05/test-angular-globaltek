@@ -1,10 +1,10 @@
 export interface IInvoice {
-  id: string;
+  id: number;
   NombreCliente: string;
   DocumentoCliente: number;
-  Fecha: Date;
+  Fecha: string;
   NumeroFactura: number;
-  TipodePago: string;
+  TipodePago: 'Contado' | 'Crédito';
   IVA: number;
   Descuento: number
   Detalle: IInvoiceProduct[];
